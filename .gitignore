@@ -1,5 +1,6 @@
-# Ignore flower dataset (too large for normal push; use Git LFS or host elsewhere)
+# Ignore flower dataset and large model files (use Git LFS or external storage instead)
 data/
+flower_model.zip
 
 # Maven
 target/
