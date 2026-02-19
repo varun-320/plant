@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FlowerPredictor {
-    // List your folder names in ALPHABETICAL order here
-    private static final List<String> LABELS = Arrays.asList("Daisy", "Lotus", "Rose", "Sunflower", "Tulip");
+    // Folder / class labels in the same order used for training
+    private static final List<String> LABELS = Arrays.asList("Daisy", "Dandelion", "Rose", "Sunflower", "Tulip");
 
     public static void main(String[] args) throws Exception {
         File modelFile = new File("E:/plant/flowersystem/flower_model.zip");
@@ -49,7 +49,13 @@ public class FlowerPredictor {
             }
         }
 
-        String flowerName = (bestGuessIndex < LABELS.size()) ? LABELS.get(bestGuessIndex) : "Unknown";
+        double threshold = 0.90; // 90% confidence required to claim a specific flower
+        String flowerName;
+        if (bestGuessIndex >= 0 && bestGuessIndex < LABELS.size() && max >= threshold) {
+            flowerName = LABELS.get(bestGuessIndex);
+        } else {
+            flowerName = "Not a flower";
+        }
 
         System.out.println("\n--- AI Results ---");
         System.out.println("Predicted Flower: " + flowerName);

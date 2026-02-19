@@ -18,8 +18,8 @@ import java.util.List;
 public class FlowerController {
 
     private MultiLayerNetwork model;
-    // Ensure these match your folder names exactly
-    private final List<String> labels = Arrays.asList("Daisy", "Lotus", "Rose", "Sunflower", "Tulip");
+    // Ensure these match your folder names / training labels exactly
+    private final List<String> labels = Arrays.asList("Daisy", "Dandelion", "Rose", "Sunflower", "Tulip");
 
     @PostConstruct
     public void init() throws Exception {
@@ -53,9 +53,13 @@ public class FlowerController {
                 }
             }
 
-            // 4. Return the result in JSON format for the website
-            return String.format("{\"flower\": \"%s\", \"confidence\": \"%.2f%%\"}", 
-                                labels.get(bestGuess), max * 100);
+            // 4. Apply a high confidence threshold so non-flower images are treated as \"Not a flower\"
+            double threshold = 0.90; // 90% confidence required to claim a specific flower
+            String label = (max >= threshold) ? labels.get(bestGuess) : "Not a flower";
+
+            // 5. Return the result in JSON format for the website
+            return String.format("{\"flower\": \"%s\", \"confidence\": \"%.2f%%\"}",
+                                label, max * 100);
 
         } catch (Exception e) {
             return "{\"error\": \"" + e.getMessage() + "\"}";
