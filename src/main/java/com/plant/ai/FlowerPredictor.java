@@ -49,7 +49,7 @@ public class FlowerPredictor {
             }
         }
 
-        double threshold = 0.90; // 90% confidence required to claim a specific flower
+        double threshold = 0.60; // 60% confidence required to claim a specific flower
         String flowerName;
         if (bestGuessIndex >= 0 && bestGuessIndex < LABELS.size() && max >= threshold) {
             flowerName = LABELS.get(bestGuessIndex);

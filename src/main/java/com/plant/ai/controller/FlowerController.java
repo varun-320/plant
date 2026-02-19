@@ -53,8 +53,8 @@ public class FlowerController {
                 }
             }
 
-            // 4. Apply a high confidence threshold so non-flower images are treated as \"Not a flower\"
-            double threshold = 0.90; // 90% confidence required to claim a specific flower
+            // 4. Apply a confidence threshold so obvious flowers are accepted, others are \"Not a flower\"
+            double threshold = 0.60; // 60% confidence required to claim a specific flower
             String label = (max >= threshold) ? labels.get(bestGuess) : "Not a flower";
 
             // 5. Return the result in JSON format for the website
