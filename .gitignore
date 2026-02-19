@@ -1,0 +1,22 @@
+# Ignore flower dataset (too large for normal push; use Git LFS or host elsewhere)
+data/
+
+# Maven
+target/
+pom.xml.tag
+*.jar
+*.war
+*.ear
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
